@@ -4,18 +4,14 @@ var path = require("path");
 var friends = require("../data/friends.js");
 
 module.exports = function (app){
-    app.get("api/friends", (req,res)=>{
-        var allFriends = req.params.friends;
-
-        if(allFriends){
-            res.json(friends.allFriendsArray);
-            return;
-        }
+    
+    app.get("/api/friends", (req,res)=>{
+        res.json(friends);
 
     })
 
     app.post("/api/friends",(req,res)=>{
-        var newFriend = req.body;
+        var userData = req.body;
 
     })
 }
