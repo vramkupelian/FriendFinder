@@ -5,16 +5,16 @@ var path = require("path");
 var app = express();
 var port = 3000;
 
-//bodyParser middleware
-app.use(bodyParser.urlencoded({extended:false}));
+//bodyParser middleware 
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-var htmlRoutes = require("./app/routing/htmlRoutes.js");
-var apiRoutes = require("./app/routing/apiRoutes.js");
+//directory to pull html files
+app.use(express.static(path.join(__dirname, "./app/public")));
 
-// //when either endpoint are hit, use the file that is called.
-app.use("/api/friends", apiRoutes);
-app.use("/", htmlRoutes);
+var htmlRoutes = require("./app/routing/htmlRoutes.js")(app);
+var apiRoutes = require("./app/routing/apiRoutes.js")(app);
 
-
-app.listen(port);
+app.listen(port, function(){
+    console.log("Friend finder is working on port #" + port);
+});

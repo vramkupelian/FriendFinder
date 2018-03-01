@@ -31,7 +31,7 @@
 
       <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">Link to Photo</span>
-        <input type="text" class="form-control photo-link" placeholder="Please don't catfish." aria-describedby="basic-addon1">
+        <input type="text" class="form-control photo-link" placeholder="Please don't catfish" aria-describedby="basic-addon1">
       </div>
 
         <br>
@@ -39,7 +39,7 @@
         <h3><strong>Question 1</strong></h3>
         <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q1">
-          <option value=""></option>
+          <option value="">Choose an option</option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -50,7 +50,7 @@
         <h3><strong>Question 2</strong></h3>
         <h4>Generally speaking, you rely more on your experience than your imagination.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q2">
-          <option value=""></option>
+          <option value="">Choose an option</option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -62,7 +62,7 @@
         <h3><strong>Question 3</strong></h3>
         <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q3">
-          <option value=""></option>
+          <option value="">Choose an option</option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -74,7 +74,7 @@
         <h3><strong>Question 4</strong></h3>
         <h4>You rarely do something just out of sheer curiosity.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q4">
-          <option value=""></option>
+          <option value="">Choose an option</option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -86,7 +86,7 @@
         <h3><strong>Question 5</strong></h3>
         <h4>People can rarely upset you.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q5">
-          <option value=""></option>
+          <option value="">Choose an option</option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -98,7 +98,7 @@
         <h3><strong>Question 6</strong></h3>
         <h4>It is often difficult for you to relate to other people’s feelings.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q6">
-          <option value=""></option>
+          <option value="">Choose an option</option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -110,7 +110,7 @@
         <h3><strong>Question 7</strong></h3>
         <h4>In a discussion, truth should be more important than people’s sensitivities.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q7">
-          <option value=""></option>
+          <option value="">Choose an option</option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -121,7 +121,7 @@
         <h3><strong>Question 8</strong></h3>
         <h4>You rarely get carried away by fantasies and ideas.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q8">
-          <option value=""></option>
+          <option value="">Choose an option</option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -132,7 +132,7 @@
         <h3><strong>Question 9</strong></h3>
         <h4>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q9">
-          <option value=""></option>
+          <option value="">Choose an option</option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -143,7 +143,7 @@
         <h3><strong>Question 10</strong></h3>
         <h4>You feel more energetic after spending time with a group of people.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q10">
-          <option value=""></option>
+          <option value="">Choose an option</option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -159,9 +159,53 @@
       </div>
     </div>
   </div>
-  <script
- src="http://code.jquery.com/jquery-3.3.1.min.js"
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"
  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
  crossorigin="anonymous"></script>
-  <script src="./add.js"></script>
+ 
+ <script type="text/javascript">
+  $(document).ready(function() {
+    $('select').material_select();
+    $('.modal').modal({
+      dismissible: false, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '10%' // Ending top style attribute
+    });
+  });
+  // Activate submit button
+  $('#submitButton').on('click', function(event) {
+    event.preventDefault();
+    // Gather user inputs
+    var userData = {
+      name: $('#userName').val().trim(),
+      photo: $('#userPhoto').val().trim(),
+      scores:[
+        $('#q1').val().trim(),
+        $('#q2').val().trim(),
+        $('#q3').val().trim(),
+        $('#q4').val().trim(),
+        $('#q5').val().trim(),
+        $('#q6').val().trim(),
+        $('#q7').val().trim(),
+        $('#q8').val().trim(),
+        $('#q9').val().trim(),
+        $('#q10').val().trim()
+      ]
+    };
+
+    // Add user inputs to friends list
+    $.post('/api/friends', userData)
+        .done(function(data) {
+          // Set the name and image values of friend match
+          $('#userMatch').html(data.matchName);
+        $("#userMatchImage").attr("src", data.matchImage);
+        // Pop open the modal dialog
+          $('#modal1').modal('open');
+        });
+  });
+</script>
+
 </html>

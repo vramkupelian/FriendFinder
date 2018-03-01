@@ -1,14 +1,9 @@
-var express = require("express");
-var bodyParser = require("body-parser");
 var path = require("path");
 
-var app = express();
+//import the friends list
+var friends = require("../data/friends.js");
 
-//bodyParser middleware
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
-
-function apiRoutes(){
+module.exports = function (app){
     app.get("api/friends", (req,res)=>{
         var allFriends = req.params.friends;
 
@@ -25,4 +20,3 @@ function apiRoutes(){
     })
 }
 
-module.exports.apiRoutes = apiRoutes();
