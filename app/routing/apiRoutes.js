@@ -21,8 +21,8 @@ module.exports = function (app){
 		// Add new user
 		friends.push(userData);
 
-		// Send appropriate response
-		res.json({status: 'OK', matchName: matchName, matchImage: matchImage});
+	// 	// Send appropriate response
+	// 	res.json({status: 'OK', matchName: matchName, matchImage: matchImage});
 	});
 }
 
