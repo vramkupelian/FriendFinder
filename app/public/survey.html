@@ -2,17 +2,15 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> -->
+    
   </head>
 
   <div class="container text-center">
     <div class="jumbotron">
       <h1>Friend Finder Survey</h1>
       <p>Let's not wait!</p>
-        <p><a class="btn btn-primary btn-lg glyphicon glyphicon-home" href="home.html" role="button"></a>
-                <!-- <button type="button" class="btn btn-default btn-lg ">
-                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> 
-                </button> -->
+        <p><a class="btn btn-primary btn-lg glyphicon glyphicon-home" href="/" role="button"></a>
         </p>
     </div>
   </div>
@@ -24,14 +22,14 @@
       <div class="panel-body">
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1">Name</span>
-          <input type="text" class="form-control name" placeholder="Ex: John Doe" aria-describedby="basic-addon1">
+          <input type="text" class="form-control userName" placeholder="Ex: John Doe" aria-describedby="basic-addon1">
         </div>
 
         <br>
 
       <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">Link to Photo</span>
-        <input type="text" class="form-control photo-link" placeholder="Please don't catfish" aria-describedby="basic-addon1">
+        <input type="text" class="form-control userPhoto" placeholder="Please don't catfish" aria-describedby="basic-addon1">
       </div>
 
         <br>
@@ -58,7 +56,6 @@
           <option value="5">5 (Strongly Agree)</option>
         </select>
     
-    
         <h3><strong>Question 3</strong></h3>
         <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q3">
@@ -69,8 +66,7 @@
           <option value="4">4</option>
           <option value="5">5 (Strongly Agree)</option>
         </select>
-    
-    
+       
         <h3><strong>Question 4</strong></h3>
         <h4>You rarely do something just out of sheer curiosity.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q4">
@@ -80,8 +76,7 @@
           <option value="3">3</option>
           <option value="4">4</option>
           <option value="5">5 (Strongly Agree)</option>
-        </select>
-    
+        </select>    
     
         <h3><strong>Question 5</strong></h3>
         <h4>People can rarely upset you.</h4>
@@ -92,8 +87,7 @@
           <option value="3">3</option>
           <option value="4">4</option>
           <option value="5">5 (Strongly Agree)</option>
-        </select>
-    
+        </select>   
     
         <h3><strong>Question 6</strong></h3>
         <h4>It is often difficult for you to relate to other people’s feelings.</h4>
@@ -105,8 +99,7 @@
           <option value="4">4</option>
           <option value="5">5 (Strongly Agree)</option>
         </select>
-    
-    
+       
         <h3><strong>Question 7</strong></h3>
         <h4>In a discussion, truth should be more important than people’s sensitivities.</h4>
         <select class="btn btn-default dropdown-toggle panel-primary" id="q7">
@@ -154,7 +147,7 @@
         <br>
         <br>
 
-      <button type="button" class="btn btn-primary btn-lg btn-block submit">Submit</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block submitButton" href = "home.html" >Submit</button>
 
       </div>
     </div>
@@ -165,23 +158,16 @@
  
  <script type="text/javascript">
   $(document).ready(function() {
-    $('select').material_select();
-    $('.modal').modal({
-      dismissible: false, // Modal can be dismissed by clicking outside of the modal
-      opacity: .5, // Opacity of modal background
-      inDuration: 300, // Transition in duration
-      outDuration: 200, // Transition out duration
-      startingTop: '4%', // Starting top style attribute
-      endingTop: '10%' // Ending top style attribute
-    });
+   
+
   });
   // Activate submit button
-  $('#submitButton').on('click', function(event) {
+  $('.submitButton').on('click', function(event) {
     event.preventDefault();
     // Gather user inputs
     var userData = {
-      name: $('#userName').val().trim(),
-      photo: $('#userPhoto').val().trim(),
+      name: $('.userName').val().trim(),
+      photo: $('.userPhoto').val().trim(),
       scores:[
         $('#q1').val().trim(),
         $('#q2').val().trim(),
@@ -195,15 +181,18 @@
         $('#q10').val().trim()
       ]
     };
+      console.log(userData);
+    for(var i = 0; i< userData.scores.length; i++){
+      userData.scores[i] = parseInt(userData.scores[i]);
+    }
 
     // Add user inputs to friends list
-    $.post('/api/friends', userData)
-        .done(function(data) {
+    var currentURL = window.location.origin;
+    $.post(currentURL + '/api/friends', userData, function(data) {
           // Set the name and image values of friend match
           $('#userMatch').html(data.matchName);
         $("#userMatchImage").attr("src", data.matchImage);
         // Pop open the modal dialog
-          $('#modal1').modal('open');
         });
   });
 </script>
