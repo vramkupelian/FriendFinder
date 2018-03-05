@@ -35,16 +35,15 @@ module.exports = function (app){
 
 		//Index of Match
 		var indexOfMinDiff = differences.indexOf(Math.min(...differences));
-		console.log(indexOfMinDiff);
 
 		matchName = friends[indexOfMinDiff].name;
 		matchImage = friends[indexOfMinDiff].photo;
-		console.log(matchName);
+	
 		// Add new user
 		friends.push(userData);
 
-	// 	// Send appropriate response
-	// 	res.json({status: 'OK', matchName: matchName, matchImage: matchImage});
+		// Send appropriate response
+		res.json({status: 'OK', matchName: matchName, matchImage: matchImage});
 	});
 }
 
