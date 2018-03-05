@@ -4,6 +4,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> -->
     
+    	<!-- Compiled and minified Materialize CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+	<!-- Compiled and minified Materialize JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
   </head>
 
   <div class="container text-center">
@@ -147,7 +152,7 @@
         <br>
         <br>
 
-      <button type="button" class="btn btn-primary btn-lg btn-block submitButton" href = "home.html" >Submit</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block submitButton" href = "/" >Submit</button>
 
       </div>
     </div>
@@ -169,32 +174,33 @@
       name: $('.userName').val().trim(),
       photo: $('.userPhoto').val().trim(),
       scores:[
-        $('#q1').val().trim(),
-        $('#q2').val().trim(),
-        $('#q3').val().trim(),
-        $('#q4').val().trim(),
-        $('#q5').val().trim(),
-        $('#q6').val().trim(),
-        $('#q7').val().trim(),
-        $('#q8').val().trim(),
-        $('#q9').val().trim(),
-        $('#q10').val().trim()
+       Number($('#q1').val().trim()),
+       Number($('#q2').val().trim()),
+       Number($('#q3').val().trim()),
+       Number($('#q4').val().trim()),
+       Number($('#q5').val().trim()),
+       Number($('#q6').val().trim()),
+       Number($('#q7').val().trim()),
+       Number($('#q8').val().trim()),
+       Number($('#q9').val().trim()),
+       Number($('#q10').val().trim()),
       ]
     };
       console.log(userData);
-    for(var i = 0; i< userData.scores.length; i++){
-      userData.scores[i] = parseInt(userData.scores[i]);
-    }
 
     // Add user inputs to friends list
     var currentURL = window.location.origin;
-    $.post(currentURL + '/api/friends', userData, function(data) {
+    $.post(currentURL + '/api/friends', userData)
+    .done(function(data) {
           // Set the name and image values of friend match
           $('#userMatch').html(data.matchName);
         $("#userMatchImage").attr("src", data.matchImage);
         // Pop open the modal dialog
+        $('#modal1').modal('open');
         });
   });
+
+
 </script>
 
 </html>
